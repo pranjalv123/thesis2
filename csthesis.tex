@@ -1,0 +1,562 @@
+%\documentclass[tocnosub,noragright,centerchapter,fullpagesingle,10pt,mixcasechap]{uiuc_csthesis18}
+\documentclass[tocnosub,noragright,centerchapter,fullpagesingle,12pt]{uiuc_csthesis18}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage[colorlinks,allcolors=blue]{hyperref}
+\usepackage{array, tabularx, caption, boldline}
+\usepackage{makecell}
+\usepackage{cellspace}
+\usepackage[tableposition=top]{caption}
+
+\usepackage[citestyle=numeric-comp,giveninits=true,doi=false,isbn=false,url=false,eprint=false,bibstyle=nature]{biblatex}
+
+% Updated version of the ECE department's latex resources
+
+% Use draftthesis for notes and date markings on every page.  Useful when you
+%   have multiple copies floating around.
+% Use offcenter for the extra .5 inch on the left side. Needed with fullpage and fancy.
+% Use mixcasechap for compatibility with hyperref package, which does NOT like all caps default
+% Use edeposit for the adviser/committee on the title page.
+% Use tocnosub to suppress subsection and lower entries in the TOC.
+% PhD candidates use "proquest" for the proquest abstract.
+
+\makeatletter
+
+\usepackage{setspace}
+\usepackage{epsfig}  % for figures
+%\usepackage{graphicx}  % another package that works for figures
+%\usepackage{subfigure}  % for subfigures
+\usepackage{amsmath}  % for math spacing
+%\usepackage{amssymb}  % for math spacing
+%\usepackage{url}  % Hyphenation of URLs.
+\usepackage{lscape}  % Useful for wide tables or figures.
+
+% Uncomment the appropriate one of the following four lines:
+%\msthesis
+\phdthesis
+%\otherdoctorate[abbrev]{Title of Degree}
+%\othermasters[abbrev]{Title of Degree}
+
+
+\title{Large Scale Phylogenomic Estimation}
+\author{Pranjal Vachaspati}
+\department{Computer Science}
+%\schools{B.A., University of Columbia, 1981\\
+%         A.M., University of Illinois at Urbana-Champaign, 1986}
+\advisor{Tandy Warnow}
+\degreeyear{2019}
+\committee{Professor Tandy Warnow, Chair, Director of Research\\Professor Nancy Amato\\ Professor Chandra Chekuri\\Professor James Leebens-Mack}
+
+
+
+% Advisor name is required for
+% - doctoral students for the ProQuest abstract
+% - master's students who do not have a master's committee
+
+% Uncomment the \committee command for
+% - all doctoral students
+% - master's students who have a master's committee
+
+\addbibresource{thesisbib.bib}
+\addbibresource{astrid.bib}
+\addbibresource{astrid-missing.bib}
+\addbibresource{siesta.bib}
+\addbibresource{svdquest.bib}
+\addbibresource{hgt.bib}
+\addbibresource{fastrfs.bib}
+
+
+
+
+
+% \pdfstringdefDisableCommands{%
+%   \let\enspace\empty  % this causes the warning for \kern
+%   \let\noindent\empty % this causes the warning for\indent
+%   \let\hskip\empty
+% }
+
+
+
+\begin{document}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{theorem}[thm]{Theorem}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{cor}{Corollary}[chapter]
+\newtheorem{rem}{Remark}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{conj}{Conjecture}[chapter]
+\newtheorem{observation}{Observation}[chapter]
+\renewcommand{\qedsymbol}{QED.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COPYRIGHT
+%
+%\copyrightpage
+%\blankpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLE
+%
+\maketitle
+
+%\raggedright
+\parindent 1em%
+
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+%
+\begin{abstract}
+Phylogenomic estimation - the science of calculating evolutionary trees from genomic data - is an important biological problem. As the amount of genomic data in biological datasets increases, new methods are needed to analyze this data. Cutting edge analyses may utilize genomes from tens of thousands of species.
+
+I present several methods for supertree and species tree estimation: ASTRID, FastRFS, SVDquest, and SIESTA. ASTRID can be used for both species tree and supertree estimation, and is designed to scale to very large datasets while maintaining a high level of accuracy. FastRFS is a supertree method that uses an exact constrained optimization algorithm to find accurate supertrees. SVDquest is a coalescent-aware species tree estimation method that estimates trees directly from sequences without using gene trees. Finally, SIESTA is a modification to the algorithms used by FastRFS, SVDquest, and other methods including ASTRAL that allows for the output and analysis of multiple optimal solutions, if they exist. 
+
+For all these methods, I describe the algorithms used, along with a theoretical analysis of their running time and their statistical consistency. I also show results on biological and simulated data that demonstrate these methods' effectiveness over a wide range of model conditions. In addition, I present the results of an experiment that compares various methods on trees simulated under both incomplete lineage sorting (ILS) as well as horizontal gene transfer (HGT).
+
+
+\end{abstract}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEDICATION
+%
+%\begin{dedication}
+%To my parents, for their love and support.
+%\end{dedication}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACKNOWLEDGMENTS
+%
+% Put acknowledgments in a file called "ack.tex" and it'll be inputted here.
+\begin{acknowledgments}
+
+First and foremost, I would like to thank my advisor, Tandy Warnow, for her support and guidance over the last five years. I got stuck many times during the last five years, whether on a research problem or (more frequently) on writing, and every time, Tandy was there to inspire me and to push me to not only get un-stuck, but to make it a little easier for me to not get stuck the next time. I am also deeply grateful for the extent to which she accepted my various time-consuming extracurricular pursuits over the course of my PhD. It is difficult for me to imagine a better advisor.
+
+I am fortunate to have the opportunity to work with the many students and researchers who have worked in the Warnow lab. Mike Nute, Erin Molloy, and Sarah Christensen have been indispensable partners on this journey, puzzling through papers, traveling to conferences, running experiments, and supporting one another through the tougher parts of the program. I am also grateful to have had the opportunity to work with others in the lab, including Nam Nguyen, Ruth Davidson, Kodi Collins, Ashu Gupta, Thien Le, Vlad Smirnov, Srilakshmi Pattabiraman, and others. Several former students in the lab provided me with guidance, insight, and inspiration, including Siavash Mirarab, Nam Nguyen, Kevin Liu, and Luay Nakhleh.
+
+I would like to thank my committee members, Tandy Warnow, Nancy Amato, Chandra Chekuri, and Jim Leebens-Mack for their comments and discussion of this dissertation.
+
+I could not have made it this far without constant support from my parents and my sister Krithi, who never doubted that I could do this (even when I doubted myself), and who have instilled in me their dedication and work ethic.
+
+This work was funded by the Debra and Ira Cohen graduate fellowship, the Saburo Muroga endowed fellowship, the Roy J. Carver fellowship, and a National Science Foundation Graduate Fellowship, as well as NSF grant DBI-1461364.
+
+\end{acknowledgments}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLE OF CONTENTS
+%
+\tableofcontents
+
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INSERT REAL CONTENT HERE
+%
+
+%\include{intro}	% for INTRODUCTION in "intro.tex"
+%\include{exper}
+%\include{concl}
+
+\flushbottom
+
+\chapter{Phylogenomic estimation}
+
+
+The goal of phylogenomic estimation is to estimate evolutionary trees
+from genomic data. An evolutionary tree is a representation of the
+evolutionary history of the organisms being studied. Finding accurate
+evolutionary trees is an interesting scientific problem in itself, and
+these trees are also key components of a number of downstream
+biological analyses.
+
+As genomic sequencing costs continue to fall dramatically,
+cutting-edge phylogenomic analyses increases in two dimensions: in the
+number of organisms (taxa) studied; and in the amount of genetic
+information considered per taxon. Upcoming analyses, including the
+next phase of the Avian Phylogenomics Project \cite{zhang2015genomics}, the 10,000 plant
+genome project \cite{cheng201810kp}, the Genome 10k project \cite{koepfli2015genome}, the i5k
+arthropod genome project \cite{levine2011i5k}, and others, will analyze whole
+genomes of thousands or tens of thousands of taxa.
+
+The scale of this data presents unique computational challenges, as
+many existing methods were designed to run on datasets with tens or
+hundreds of taxa. In addition to running efficiently on large
+datasets, new methods must also estimate accurate trees on datasets
+generated under a range of biological conditions that complicate
+phylogenomic analyses, including incomplete lineage sorting and
+horizontal gene transfer.
+
+\section*{Organization of this Work}
+
+Chapter \ref{chapter:background} provides much of the background
+necessary to understand this research into phylogenomic methods,
+including the relatively minimal amount of biology needed to describe
+the relevant mathematical models of evolution.
+
+\subsection*{Supertree Estimation}
+
+Chapters \ref{chapter:fastrfs}-\ref{chapter:astrid-missing} focus on supertree estimation. The goal of
+supertree estimation is to combine small trees on subsets of a larger
+taxon set into a single tree on the entire taxon set. Supertree
+estimation is commonly used to combine results of smaller analyses (as
+in \cite{kennedy2002seabird,cpl,THPL,marsupial,placental}).
+
+A supertree method can also be used as a component of a
+divide-and-conquer technique for species tree estimation. These
+techniques (e.g. \cite{dactal}) divide a large dataset into many small, overlapping
+datasets, and run a species tree estimation method on each
+subset. Then, a supertree method is used to combine trees on the
+subsets into a tree on the entire taxon set. In this way, methods that
+may be too slow or memory intensive to run on a large dataset directly
+may still be used to analyze that dataset.
+
+We describe two methods for supertree estimation: FastRFS \cite{vachaspati2017fastrfs}, along with SIESTA \cite{vachaspati2018siesta}, a modification to FastRFS, and ASTRID \cite{vachaspati2015astrid}.
+
+Chapter \ref{chapter:fastrfs} introduces FastRFS
+\cite{fastrfs}. Designed as a supertree method, FastRFS uses a
+constrained optimization technique to exactly solve its NP-hard
+optimization criterion within a constrained search space.
+
+Chapter \ref{chapter:siesta} describes SIESTA, an improvement to the
+constrained optimization algorithm used in FastRFS that allows it to
+consider multiple optimal solutions to its optimization criterion and
+return consensus trees of those solutions.
+
+Chapter \ref{chapter:astrid-missing} describes modifications to ASTRID
+(which is discussed in more detail in the species tree context in
+Chapter \ref{chapter:astrid}) that allow it to be used effectively for
+very large species tree analyses.
+
+\subsection*{Species Tree Estimation}
+
+Chapters \ref{chapter:astrid}-\ref{chapter:hgt} discuss methods for species tree
+estimation. These methods take evolutionary trees on individual genes
+(gene trees) as input, which may differ from one another due to
+various biological effects, and return a species tree, which
+represents the actual evolutionary history of the organisms.
+
+Chapter \ref{chapter:astrid} describes ASTRID, a distance matrix based
+method for species tree estimation. ASTRID provides highly accurate
+species trees, and is capable of analyzing extremely large datasets in
+a small amount of time.
+
+Chapter \ref{chapter:svdquest} introduces SVDquest, which is an
+implementation of the SVDquartets method that uses a constrained
+optimization technique to exactly optimize the SVDquartets
+optimization criterion within a constrained search space. This allows
+accurate species trees to be estimated directly from alignments in a
+statistically consistent manner.
+
+Chapter \ref{chapter:hgt} analyzes the behavior of phylogenetic
+estimation methods on datasets with incomplete lineage sorting (ILS)
+as well as horizontal gene transfer (HGT). 
+
+
+\chapter{Background}
+\label{chapter:background}
+\section{Phylogenetic Trees}
+
+The use of a phylogenetic tree to describe evolutionary relationships
+was popularized by Darwin, who used a diagram of a tree as the sole
+illustration in \emph{On the Origin of Species}
+\cite{darwin1859origin}. While the methods used to estimate these
+trees have changed drastically, the basic structure and meaning of
+these trees is more or less the same.
+
+Phylogenetic trees (see, e.g. Chapter 2 of \cite{warnow2017computational}) have \emph{nodes} (\emph{leaves} and \emph{internal
+  nodes}) and \emph{edges}.
+The leaves of a phylogenetic tree represent extant taxa that have been
+sampled for the analysis, referred to as the taxon set.
+We let $\mathcal{L}(T)$ denote the leafset of a tree $T$. 
+Internal nodes represent speciation events. An internal node also
+represents a species that is the most recent common ancestor of all
+the descendants of that node, and in some cases (for example, when
+fossil data is used), may correspond to a known species.
+
+Edges represent the evolution of a species without any speciation
+events that led to multiple extant species in the dataset (that is to
+say, speciation events may have occurred along an edge, but only one
+of those species survived to the present day and was included in the
+analysis). An edge may have a length, which represents the expected amount of change between the nodes the edge connects.
+
+The deletion of an edge $e$ from a tree $T$ induces a 
+bipartition of $\mathcal{L}(T)$ into two sets $A$ and $B$,
+denoted by $[A,B]$. Every unrooted 
+tree $T$ is defined by its set $Bip(T)$ of bipartitions. 
+
+%\subsection{Rooted and unrooted trees}
+
+Phylogenetic trees may be rooted or unrooted. In many models of
+evolution, the root is not identifiable; in other words, every rooting
+of the same unrooted tree will produce the same distribution of site
+patterns on the leaves of the tree. Accurately identifying the root of
+an unrooted tree can be challenging in some cases \cite{tian2017rooting,boykin2010comparison}, especially when evolution is not clock-like (that is, when mutation rates vary across the tree).
+Trees may be binary or multifurcating (non-binary). Each internal node
+in a binary tree has degree $3$ (except for the root, which has degree
+$2$), while internal nodes in multifurcating trees may have higher
+degrees and are referred to as polytomies. Since speciation events are in reality binary,
+polytomies in trees represent an uncertainty as to the ordering
+of two or more speciation events.
+% TODO figure
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{example-tree.png}
+    \caption{Commonly accepted topologies for unrooted and rooted phylogenetic trees on the four great ape genera (\emph{Hominidae}) \cite{wilson2005mammal}.}
+    \label{fig:example-tree}
+\end{figure}
+
+\subsection{Distances between trees}
+
+The distance between two trees that share a set of taxa can be
+measured in a few different ways, the most common of which is the
+Robinson-Foulds (RF) distance \cite{robinson1981comparison}. 
+The Robinson-Foulds (RF) distance between trees $T$ and $T'$ that are on the same leafset is the number of bipartitions that are in one tree but not the other (i.e., $RF(T,T') = |Bip(T) \triangle Bip(T')|$). Note that when $T$ and $T'$ have the same leafset, then $RF(T,T')=0$ if and only if $T=T'$.
+
+
+The RF distance is commonly used to measure the accuracy of an
+estimation method with respect to a known true tree from a
+simulation. Two related metrics are the number of false positives and false negatives, the number of edges present in the estimated tree but not in the true tree and vice versa. These are equal to each other and to the RF distance if both trees are binary, but may not be equal if either tree has polytomies.
+
+Variants of the RF distance are sometimes used. The weighted RF distance \cite{robinson1979comparison} takes into account edge lengths, so that longer edges contribute more to the distance and differences between edge lengths for matching edges are counted when measuring the distance. The matching distance \cite{lin2012metric} pairs every bipartition in one tree with a bipartition in the other tree, and weights each pair by the number of leaves that must be moved to make the bipartitions match.
+
+Two additional tree distance metrics include the triplet and
+quartet distances \cite{bansal2008comparing, critchlow1996triples, mirarab2015astral, sand2014tqdist}. A triplet is a rooted tree on three leaves, and a
+quartet is an unrooted tree on four leaves. For three taxa, there are
+three possible rooted triplet topologies, and for four taxa, there are
+three possible unrooted quartet topologies. Triplets and quartets are
+the smallest informative rooted and unrooted trees; there is only one
+possible rooted tree on two taxa and one possible unrooted tree on
+three taxa. The triplet or quartet distance between two trees is the
+proportion of triplet or quartet topologies shared between the trees.
+
+\section{Molecular Sequence Data}
+
+The input to phylogenetic estimation problems is often an alignment
+matrix containing DNA, RNA, or amino acid sequences (see \cite{warnow2017computational}, Chapter 9). Each row in the
+alignment corresponds to a single taxon, and each column represents a
+single character, which may take various character states (depending
+on the type of the sequences; a DNA character can take the states
+$\{A,C,T,G\}$), or $-$, representing a character insertion or deletion
+(``indel''). 
+
+\section{Models of Sequence Evolution}
+\label{section:simple-model}
+
+Sequence evolution is modeled as a Markov process, in which each site evolves independently, and a
+character transitions from one state to another along an edge $e$
+depending on the length of $e$ and a \emph{rate matrix}.
+
+The simplest model of nucleotide sequence evolution is the Jukes-Cantor model \cite{jukes1969evolution}. This model has a single parameter $\mu$, the overall substitution rate, which gives the expected number of substitutions per unit edge length for each site. More complicated substitution models are also possible, with the most common being the generalized time-reversible (GTR) mathematical model of evolution \cite{tavare-gtr}, which allows for each element in a diagonally symmetric rate matrix to be set independently. The GTR model is often augmented by allowing for a proportion of invariant sites, as well as allowing rates to vary across the genome according to a gamma distribution. This gives the GTR+$\Gamma$+I model, which is among the most commonly used models for tree estimation from sequences \cite{gu1995maximum,allman2008identifiability,chai2011rogers}.
+
+While Jukes-Cantor substitution rates or GTR parameters can typically be estimated from the sequence data being analyzed, amino acid substitution matrices are much larger ($20\times 20$ instead of $4 \times 4$), so fixed matrices calculated from empirical data are often used. These include the JTT matrix \cite{jones1992rapid} and the WAG matrix \cite{whelan2001general}. 
+More information about models of sequence evolution can be found in \cite{yang2014molecular} (chapter 2 for nucleotide models; chapter 3 for amino acids).
+
+
+\section{Gene Tree Estimation Methods}
+
+These models of sequence evolution are useful because they are identifiable \cite{chai2011rogers} and because computing the relative likelihoods of
+different trees given a sequence alignment is computationally feasible \cite{felsenstein1981evolutionary}. Maximum likelihood tree estimators that use these models, including FastTree \cite{price2010fasttree}, RAxML \cite{stamatakis2014raxml}, and IQ-TREE \cite{nguyen2014iq} are important tools for phylogenomic analysis. Other methods for estimating trees from sequences include Bayesian methods, which use a Markov Chain Monte Carlo (MCMC) process to sample a probability distribution over trees; and distance matrix methods like neighbor joining \cite{saitou1987neighbor} and FastME \cite{lefort2015fastme}, which take as input the distance between each pair of sequences, rather than the sequences themselves. Bayesian methods are often slower than maximum likelihood estimators, and distance methods, while often faster than maximum likelihood methods, are typically less accurate \cite{Wang-MSA2011}.
+
+
+
+\section{Gene Tree Heterogeneity}
+\label{sec:heterogeneity}
+
+However, evolution is in reality more complex than the GTR model
+suggests. This is because different parts of the genome evolve in
+different ways, with different evolutionary histories and evolutionary
+trees. This can happen for a number of reasons, including
+horizontal gene transfer (HGT) \cite{steel2013identifying,roch2013recovering}, incomplete lineage sorting (ILS) \cite{maddison1997gene,mirarab2014evaluating}, and gene duplication and loss \cite{maddison1997gene}.
+
+We refer to a portion of the genome that has a single evolutionary
+history as a \emph{recombination-free locus}, \emph{c-gene} or often as just a \emph{gene} \cite{SpringerGatesy2016}. This is
+different from the standard biological definition of a gene, (i.e. a
+genetic sequence that codes for a particular protein). The
+evolutionary history of a gene is captured in a \emph{gene tree}, and
+differences between these gene trees are referred to as \emph{gene
+  tree heterogeneity}. 
+
+\subsection{Horizontal gene transfer (HGT)}
+
+% TODO figure
+The easiest to understand cause of gene tree heterogeneity is
+horizontal (or lateral) gene transfer (HGT or LGT) \cite{jain1999horizontal}. An HGT event
+occurs when two organisms from different species exchange DNA. There
+are many biological reasons for this. Bacteria, for example, emit DNA
+in the form of short circular segments called plasmids, and other
+bacteria can readily consume these plasmids and add them to their own
+DNA \cite{thomas2005mechanisms}. Bacterial evolutionary trees have high levels of HGT, and for
+many analyses, it is more appropriate to think of bacterial evolution
+as represented by a network rather than a tree \cite{huson2005application}. Eukaryotic organisms
+also experience HGT, although through different mechanisms and less frequently than bacteria. Examples include hybridization and introgression, where two different species can mate
+to produce fertile offspring \cite{anderson1953introgressive, yu2013fast}. 
+
+
+\subsection{Incomplete lineage sorting (ILS) and the coalescent model}
+
+Incomplete lineage sorting (ILS) \cite{maddison1997gene} is a much more common cause of gene
+tree heterogeneity among eukaryotes. ILS is most common when population sizes are large and speciation times are short. In these cases, mutations might not become distributed throughout a population in the time between speciation events; in other words, looking back in time, two lineages for a particular gene might not coalesce on the edge that corresponds to the common ancestor of their species. This process can result in gene trees that differ from species trees, and is modeled by the multispecies coalescent. 
+
+\subsection{Gene duplication and loss}
+
+A third cause of gene tree heterogeneity is gene duplication and loss. As organisms evolve, portions of the genome may be duplicated, and portions of the genome may be lost. Gene duplication events result in multiple copies of a particular gene in an organism, called paralogs. If different descendants lose different paralogs, the evolutionary history of a gene may reflect duplication events, rather than speciation events \cite{maddison1997gene}.
+
+\section{Phylogenomic Estimation under the Coalescent Model}
+
+Four general approaches are commonly used for phylogenomic estimation under the coalescent model. 
+
+The first of these is the Bayesian Markov Chain Monte Carlo co-estimation approach (e.g. MrBayes \cite{ronquist2012mrbayes}, *BEAST \cite{Heled2010}, and BEST \cite{Liu2008}). These methods sample from tree space to simultaneously estimate a probability distribution for gene trees and species trees. While they may in theory provide more information about the dataset than other methods and can be quite accurate, in practice they are extremely slow and cannot be run on datasets with more than about 50 taxa \cite{bbca}.
+
+The second approach is concatenated maximum likelihood (CA-ML). The alignments for each c-gene are concatenated together to form a single long alignment, and a maximum likelihood estimator produces a tree. Commonly used maximum likelihood methods are RAxML \cite{stamatakis2014raxml,Stamatakis2006}, FastTree \cite{price2010fasttree}, and IQ-TREE \cite{nguyen2014iq}. CA-ML is in practice accurate on many datasets; however, it is not statistically consistent on datasets with ILS \cite{RochSteel-journal}, and in fact can be positively misleading - that is, as the amount of data increases, the probability of producing the correct tree does not converge to $1$ and the probability of producing an incorrect tree may converge to $1$.
+
+The third type of methods, and the ones focused on here, are coalescent-aware summary methods. These typically operate in two phases. First, a maximum likelihood method estimates a gene tree on each gene's alignment. Then, the summary method uses the gene trees to estimate the species tree. Some commonly used coalescent-aware methods include ASTRAL \cite{mirarab2014astral,mirarab2015astral,astral3,ASTRAL-MP}, MP-EST \cite{MPEST}, NJst \cite{liu2011estimating}, and ASTRID \cite{vachaspati2015astrid}. 
+
+Finally, site based coalescent-aware phylogenetic estimation methods estimate trees directly from sequences, bypassing gene tree estimation. Unlike CA-ML, which also estimates trees directly from sequences, site-based methods are designed to be statistically consistent under the multi-species coalescent.  These include SVDquartets \cite{chifman2014quartet}, SVDquest \cite{vachaspati2018svdquest}, and SNAPP \cite{bryant2012inferring}.
+
+\subsubsection{ASTRAL}
+
+ASTRAL takes as input a set of gene trees and outputs a species tree that minimizes the quartet distance to the gene trees. This is an NP-hard problem \cite{jiang2001polynomial}, but ASTRAL is able to solve a constrained version in polynomial time. It first generates a set $X$ of bipartitions from the input gene trees. Then outputs the tree with the lowest quartet distance to the input trees, constrained such that every bipartition in that tree comes from the set $X$. ASTRAL is fast and accurate in practice \cite{ASTRAL-MP,vachaspati2015astrid}.
+
+\subsubsection{MP-EST}
+
+MP-EST takes as input a set of rooted gene trees and computes the triplet distribution over these trees. It then attempts to find a species tree that maximizes the probability of generating that distribution of triplets. MP-EST uses a set of heuristics to generate an approximate solution. MP-EST can be slow in practice, and is typically less accurate than leading methods \cite{vachaspati2015astrid,davidson2015phylogenomic}.
+
+\subsubsection{NJst}
+
+NJst takes as input a set of gene trees, and calculates distance matrices based on topological distances in each tree. It averages those matrices together and runs neighbor-joining \cite{saitou1987neighbor} on the average matrix. NJst gives fairly accurate trees in practice, but is relatively slow compared to other methods \cite{davidson2015phylogenomic}.
+
+\subsubsection{ASTRID}
+
+ASTRID (see Chapter \ref{chapter:astrid}) uses a similar approach to NJst, computing the same average distance matrix, but can use a variety of distance based phylogenetic estimation methods to find more accurate trees than NJst in less time. ASTRID gives accurate trees in practice, and is much faster than any competing method, especially on large datasets \cite{vachaspati2015astrid}.
+
+\subsubsection{SVDquest}
+
+SVDquest (see Chapter \ref{chapter:svdquest}) is an implementation of the SVDquartets technique \cite{svdquartets}, which  estimates a species tree directly from alignments instead of from gene trees. SVDquartets generates a set of quartets from the alignments, and SVDquest seeks a tree that maximizes support over these quartets.
+
+\section{Supertree Estimation}
+
+
+Supertree estimation \cite{warnow2018supertree} is the problem of computing a tree on a set $S$ of taxa from a set of estimated  trees (called ``source trees") on subsets of $S$. 
+Traditionally, the purpose of supertree estimation was 
+to combine published species trees estimated by different research groups around the world, using different datasets and different methods. 
+Supertree methods have been used
+to construct many species trees,
+%\cite{placental,marsupial,cpl,THPL,supertrees-placental,seabirds,supertree-sanderson,pisani2007supertrees},
+and the development of supertree methods is an area 
+of very active research
+(see 
+\cite{bininda2004phylogenetic} for some of the early literature,
+and \cite{mrl,superfine,Akanni-MLsupertree} for some more recent methods).
+
+More recently, supertree estimation has been used within divide-and-conquer frameworks, in which a large and potentially heterogeneous dataset is divided into overlapping smaller subsets, trees are estimated on each subset, and then combined into a tree on the full dataset using a supertree method. 
+These divide-and-conquer methods thus enable the application of  statistical phylogeny estimation methods to scale to larger datasets
+\cite{dactal,BayzidRECOMBCG2014,afc,dcm1-huson}.
+Each of these methods has been able to improve the accuracy and/or speed of its base method.  
+Thus, supertree computation provides an essential tool for both moderate- and large-scale phylogeny estimation, and is relevant to both gene tree estimation and species tree estimation. 
+
+\subsection{Methods}
+
+Some species tree estimation methods, including ASTRAL and ASTRID, can be used effectively for supertree estimation. However, some methods are designed explicitly for supertree estimation, including MRP \cite{ragan1992phylogenetic}, MRL \cite{nguyen2012mrl}, and FastRFS \cite{vachaspati2017fastrfs}. 
+
+\subsubsection{MRP and MRL}
+
+Matrix Representation with Parsimony (MRP) \cite{ragan1992phylogenetic} and Matrix Representation with Likelihood (MRL) \cite{nguyen2012mrl} are two related supertree estimation methods. They start by creating an alignment matrix where each column corresponds to a particular edge in an input tree. Taxa on one side are coded as $0$, taxa on the other side are coded as $1$, and taxa not in the tree are coded as $-$. Then, a phylogenetic maximum parsimony estimator or maximum likelihood estimator like RAxML is run on this matrix to produce a supertree.
+
+\subsubsection{FastRFS}
+
+FastRFS (discussed further in Chapter \ref{chapter:fastrfs}) is a method to solve the NP-hard Robinson-Foulds supertree problem \cite{bansal2010robinson}, which minimizes the sum of the Robinson-Foulds distances to the input trees. FastRFS uses a constrained exact optimization algorithm similar to that used in ASTRAL and SVDquest to find a solution in polynomial time within a constrained search space. 
+
+
+\subsubsection{Other methods}
+
+Numerous other methods can also be used for supertree estimation, including BCD \cite{fleischauer2017bad}, which is a fast and accurate method for rooted supertree construction, and PluMiST \cite{plumist} and MulRF \cite{mulrf}, which are heuristic methods for the Robinson-Foulds supertree problem. Species tree methods like ASTRAL \cite{mirarab2015astral} and ASTRID \cite{vachaspati2015astrid} can also be used for supertree construction. Furthermore, SuperFine \cite{superfine} can be used to boost the accuracy and scalability of other supertree methods by using another supertree method to refine a conservative estimate of the supertree.
+
+
+
+
+%\part{Supertree Estimation}
+%\label{part:supertree}
+
+\chapter[FastRFS]{FastRFS\protect\footnotemark}\footnotetext{This chapter contains material previously published in \cite{vachaspati2017fastrfs}, which was a joint work with Tandy Warnow. It has been edited slightly for brevity. PV implemented FastRFS, performed experiments, wrote the first draft, and analyzed the data. TW designed the study, analyzed the data, and wrote the final draft.}
+\label{chapter:fastrfs}
+\input{fastrfs.tex}
+\section{Supplementary Data for FastRFS}
+\input{fastrfs-supplement.tex}
+
+\end{document}
+
+\chapter[Improving Dynamic Programming for Phylogenomic Estimation
+  with SIESTA]{Improving Dynamic Programming for Phylogenomic Estimation
+  with SIESTA\protect\footnotemark}\footnotetext{This chapter contains material previously published in \cite{vachaspati2018siesta}, which was a joint work with Tandy Warnow. It has been edited slightly for brevity. PV implemented SIESTA, performed experiments, wrote the first draft, and analyzed the data. TW analyzed the data, and wrote the final draft.}
+\label{chapter:siesta}
+\input{siesta.tex}
+\section{Supplementary Data for SIESTA}
+\input{siesta-supplement.tex}
+
+\chapter[Supertree Estimation with ASTRID]{Supertree Estimation with ASTRID\protect\footnotemark}\footnotetext{This chapter contains unpublished material.
+}
+\label{chapter:astrid-missing}
+\input{astrid-missing.tex}
+
+
+
+
+%\part{Species Tree Estimation}
+%\label{part:speciestree}
+
+\chapter[Species Tree Estimation with ASTRID]{Species Tree Estimation with ASTRID\protect\footnotemark}\footnotetext{This chapter contains material previously published in \cite{vachaspati2015astrid}, which was a joint work with Tandy Warnow. It has been edited slightly for brevity. PV implemented ASTRID, performed experiments, wrote the first draft, and analyzed the data. TW designed the study, analyzed the data, and wrote the final draft.}
+\label{chapter:astrid}
+\input{astrid.tex}
+
+
+\chapter[SVDquest]{SVDquest\protect\footnotemark}\footnotetext{This chapter contains material previously published in \cite{vachaspati2018svdquest}, which was a joint work with Tandy Warnow. It has been edited slightly for brevity. PV implemented SVDquest, performed experiments, wrote the first draft, and analyzed the data. TW analyzed the data, and wrote the final draft.}
+\label{chapter:svdquest}
+\input{svdquest.tex}
+\section{Supplementary Data for SVDquest}
+\input{svdquest-supplement.tex}
+
+\chapter[Species Tree Estimation with ILS and HGT]{Species Tree Estimation with ILS and HGT\protect\footnotemark}\footnotetext{This chapter contains material previously published in \cite{davidson2015phylogenomic}, which was a joint work with Ruth Davidson, Siavash Mirarab, and Tandy Warnow. It has been edited slightly for brevity. RD performed ASTRAL-2 analyses of the simulated and biological data sets, the CA-ML on the simulated data for 10 genes, and wrote the first draft of the paper. PV performed the wQMC and NJst analyses of the simulated data sets and made figures. SM generated the simulated data, performed the CA-ML analysis for 50, 200, and 1000 genes, and made figures. TW conceived of the project, supervised the research, proved the theorems, and wrote the final paper. All authors read and critiqued drafts of the paper.}
+\label{chapter:hgt}
+\input{hgt.tex}
+
+
+\chapter{Conclusions and Future Work}
+\input{conclusions.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIX
+%
+\appendix
+%\include{apx}
+
+\backmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY
+%
+
+% \bibliographystyle{IEEE_ECE}
+% Put references in BibTeX format in thesisrefs.bib.
+% \bibliography{thesisrefs}
+\printbibliography
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AUTHOR'S BIOGRAPHY
+% As of 10/03/2011, Author's Biography or Vita no longer accepted by Grad College
+
+\end{document}
+\endinput

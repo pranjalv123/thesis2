@@ -1,0 +1,622 @@
+% bmc_article.bib
+% 
+%  An example of bibtex entries.
+%  Entries taken from BMC instructions for authors page.
+% @article{NJst,
+% abstract = {In this study, we develop a distance method for inferring unrooted species trees from a collection of unrooted gene trees. The species tree is estimated by the neighbor joining (NJ) tree built from a distance matrix in which the distance between two species is defined as the average number of internodes between two species across gene trees, that is, average gene-tree internode distance. The distance method is named NJ(st) to distinguish it from the original NJ method. Under the coalescent model, we show that if gene trees are known or estimated correctly, the NJ(st) method is statistically consistent in estimating unrooted species trees. The simulation results suggest that NJ(st) and STAR (another coalescence-based method for inferring species trees) perform almost equally well in estimating topologies of species trees, whereas the Bayesian coalescence-based method, BEST, outperforms both NJ(st) and STAR. Unlike BEST and STAR, the NJ(st) method can take unrooted gene trees to infer species trees without using an outgroup. In addition, the NJ(st) method can handle missing data and is thus useful in phylogenomic studies in which data sets often contain missing loci for some individuals.},
+% author = {Liu, Liang and Yu, Lili},
+% doi = {10.1093/sysbio/syr027},
+% file = {:home/pranjal/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Liu, Yu - 2011 - Estimating species trees from unrooted gene trees.pdf:pdf},
+% isbn = {1063-5157$\backslash$r1076-836X},
+% issn = {10635157},
+% journal = {Syst Biol},
+% keywords = {Coalescent theory,gene tree,neighbor joining,species tree},
+% mendeley-groups = {598 final project,PyNJst paper},
+% number = {5},
+% pages = {661--667},
+% pmid = {21447481},
+% title = {Estimating species trees from unrooted gene trees},
+% volume = {60},
+% year = {2011}
+% }
+% @article{astral,
+% author = {Mirarab, S. and Reaz, R. and Bayzid, Md S. and Zimmermann, T. and Swenson, M. S. and Warnow, T.},
+% doi = {10.1093/bioinformatics/btu462},
+% file = {:home/pranjal/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/122f1c9a23f61adb159c226fe53a0f7997ee116b.pdf:pdf},
+% issn = {1367-4803},
+% journal = {Bioinformatics},
+% keywords = {ILS,astral,implementation,method,theory},
+% mendeley-groups = {598 final project,PyNJst paper},
+% mendeley-tags = {ILS,implementation},
+% pages = {i541--i548},
+% title = {{ASTRAL: genome-scale coalescent-based species tree estimation}},
+% url = {http://bioinformatics.oxfordjournals.org/cgi/doi/10.1093/bioinformatics/btu462},
+% volume = {30},
+% year = {2014}
+% }
+
+% @article{Price2010,
+% abstract = {We recently described FastTree, a tool for inferring phylogenies for alignments with up to hundreds of thousands of sequences. Here, we describe improvements to FastTree that improve its accuracy without sacrificing scalability.},
+% author = {Price, Morgan N. and Dehal, Paramvir S. and Arkin, Adam P.},
+% doi = {10.1371/journal.pone.0009490},
+% file = {:home/pranjal/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/f5f0e9e6c4f9ab3630b30bb1fcc5f6f564987966.pdf:pdf},
+% isbn = {1932-6203 (Electronic)$\backslash$r1932-6203 (Linking)},
+% issn = 19326203,
+% journal = {PLoS ONE},
+% mendeley-groups = {598 final project,PyNJst paper},
+% number = 3,
+% pmid = 20224823,
+% title = {{FastTree 2 - Approximately maximum-likelihood trees for large alignments}},
+% url = {http://www.plosone.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pone.0009490\&representation=PDF},
+% volume = 5,
+% year = 2010
+% }
+@article{avni2014weighted,
+IDS={wQMC},
+  title={Weighted quartets phylogenetics},
+  author={Avni, Eliran and Cohen, Reuven and Snir, Sagi},
+  journal={Systematic biology},
+  volume={64},
+  number={2},
+  pages={233--242},
+  year={2014},
+  publisher={Oxford University Press}
+}
+@article{RochSteel-journal,
+IDS={Roch2014,roch2015likelihood},
+author = {Roch, Sebastien and Steel, Mike},
+volume = 100, year = 2015,
+pages = {56-62},
+title = {{Likelihood-based tree reconstruction on a concatenation of alignments can be statistically
+inconsistent}},
+journal = {Theoretical Population Biology},
+}
+
+
+@article{Desper2002,
+author = {Desper, Richard and Gascuel, Olivier},
+doi = {10.1089/106652702761034136},
+issn = {1066-5277},
+journal = {J Comput Biol},
+keywords = {computational speed,distance methods,minimum evolution,phylogenetic inference,topological accuracy},
+pages = {687--705},
+pmid = {12487758},
+title = {{Fast and accurate phylogeny minimum-evolution principle}},
+volume = {9},
+year = {2002}
+}
+
+
+% @article{Criscuolo2008,
+% abstract = {BACKGROUND: Distance-based phylogeny inference methods first estimate evolutionary distances between every pair of taxa, then build a tree from the so-obtained distance matrix. These methods are fast and fairly accurate. However, they hardly deal with incomplete distance matrices. Such matrices are frequent with recent multi-gene studies, when two species do not share any gene in analyzed data. The few existing algorithms to infer trees with satisfying accuracy from incomplete distance matrices have time complexity in O(n4) or more, where n is the number of taxa, which precludes large scale studies. Agglomerative distance algorithms (e.g. NJ 12) are much faster, with time complexity in O(n3) which allows huge datasets and heavy bootstrap analyses to be dealt with. These algorithms proceed in three steps: (a) search for the taxon pair to be agglomerated, (b) estimate the lengths of the two so-created branches, (c) reduce the distance matrix and return to (a) until the tree is fully resolved. But available agglomerative algorithms cannot deal with incomplete matrices. RESULTS: We propose an adaptation to incomplete matrices of three agglomerative algorithms, namely NJ, BIONJ 3 and MVR 4. Our adaptation generalizes to incomplete matrices the taxon pair selection criterion of NJ (also used by BIONJ and MVR), and combines this generalized criterion with that of ADDTREE 5. Steps (b) and (c) are also modified, but O(n3) time complexity is kept. The performance of these new algorithms is studied with large scale simulations, which mimic multi-gene phylogenomic datasets. Our new algorithms - named NJ*, BIONJ* and MVR* - infer phylogenetic trees that are as least as accurate as those inferred by other available methods, but with much faster running times. MVR* presents the best overall performance. This algorithm accounts for the variance of the pairwise evolutionary distance estimates, and is well suited for multi-gene studies where some distances are accurately estimated using numerous genes, whereas others are poorly estimated (or not estimated) due to the low number (absence) of sequenced genes being shared by both species. CONCLUSION: Our distance-based agglomerative algorithms NJ*, BIONJ* and MVR* are fast and accurate, and should be quite useful for large scale phylogenomic studies. When combined with the SDM method 6 to estimate a distance matrix from multiple genes, they offer a relevant alternative to usual supertree techniques 7. Binaries and all simulated data are downloadable from 8.},
+% author = {Criscuolo, Alexis and Gascuel, Olivier},
+% doi = {10.1186/1471-2105-9-166},
+% file = {:home/pranjal/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/8f41ea464583c2f1ff39acf49396562dd8d18e35.pdf:pdf},
+% isbn = {1471-2105},
+% issn = {1471-2105},
+% journal = {BMC Bioinformatics},
+% pages = {166},
+% pmid = {18366787},
+% title = {{Fast NJ-like algorithms to deal with incomplete distance matrices.}},
+% url = {http://www.biomedcentral.com/content/pdf/1471-2105-9-166.pdf},
+% volume = {9},
+% year = {2008}
+% }
+
+% @article{Kingman1982,
+% abstract = {A new Markov chain is introduced which can be used to describe the family relationships among n individuals drawn from a particular generation of a large haploid population. The properties of this process can be studied, simultaneously for all n, by coupling techniques. Recent results in neutral mutation theory are seen as consequences of the genealogy described by the chain},
+% author = {Kingman, J. F. C.},
+% doi = {10.2307/3213548},
+% isbn = {00219002},
+% issn = {00219002},
+% journal = {J  Appl Prob},
+% pages = {27},
+% title = {On the Genealogy of Large Populations},
+% url = {http://www.jstor.org/stable/3213548},
+% volume = {19},
+% year = {1982}
+% }
+% @article{ASTRALII,
+% author = {Mirarab, Siavash and Warnow, Tandy}, 
+% title = {{ASTRAL-II}: coalescent-based species tree estimation with many hundreds of taxa and thousands of genes},
+% volume = {31}, 
+% number = {12}, 
+% pages = {i44-i52}, 
+% year = {2015}, 
+% doi = {10.1093/bioinformatics/btv234}, 
+% abstract ={Motivation: The estimation of species phylogenies requires multiple loci, since different loci can have different trees due to incomplete lineage sorting, modeled by the multi-species coalescent model. We recently developed a coalescent-based method, ASTRAL, which is statistically consistent under the multi-species coalescent model and which is more accurate than other coalescent-based methods on the datasets we examined. ASTRAL runs in polynomial time, by constraining the search space using a set of allowed ‘bipartitions’. Despite the limitation to allowed bipartitions, ASTRAL is statistically consistent.Results: We present a new version of ASTRAL, which we call ASTRAL-II. We show that ASTRAL-II has substantial advantages over ASTRAL: it is faster, can analyze much larger datasets (up to 1000 species and 1000 genes) and has substantially better accuracy under some conditions. ASTRAL’s running time is O(n2k|X|2)
+% , and ASTRAL-II’s running time is O(nk|X|2)
+% , where n is the number of species, k is the number of loci and X is the set of allowed bipartitions for the search space.Availability and implementation: ASTRAL-II is available in open source at https://github.com/smirarab/ASTRAL and datasets used are available at http://www.cs.utexas.edu/~phylo/datasets/astral2/.Contact: smirarab@gmail.comSupplementary information: Supplementary data are available at Bioinformatics online.}, 
+% URL = {http://bioinformatics.oxfordjournals.org/content/31/12/i44.abstract}, 
+% eprint = {http://bioinformatics.oxfordjournals.org/content/31/12/i44.full.pdf+html}, 
+% journal = {Bioinformatics} 
+% }
+@article{MPEST,
+IDS={Liu2010a},
+abstract = {Several phylogenetic approaches have been developed to estimate species trees from collections of gene trees. However, maximum likelihood approaches for estimating species trees under the coalescent model are limited. Although the likelihood of a species tree under the multispecies coalescent model has already been derived by Rannala and Yang, it can be shown that the maximum likelihood estimate (MLE) of the species tree (topology, branch lengths, and population sizes) from gene trees under this formula does not exist. In this paper, we develop a pseudo-likelihood function of the species tree to obtain maximum pseudo-likelihood estimates (MPE) of species trees, with branch lengths of the species tree in coalescent units.},
+author = {Liu, Liang and Yu, Lili and Edwards, Scott V},
+doi = {10.1186/1471-2148-10-302},
+file = {::},
+isbn = {3028576414},
+issn = {1471-2148},
+journal = {BMC Evol  Biol},
+pages = {302},
+pmid = {20937096},
+title = {A maximum pseudo-likelihood approach for estimating species trees under the coalescent model},
+volume = {10},
+year = {2010}
+}
+% @article{StarBEAST,
+% abstract = {Until recently, it has been common practice for a phylogenetic analysis to use a single gene sequence from a single individual organism as a proxy for an entire species. With technological advances, it is now becoming more common to collect data sets containing multiple gene loci and multiple individuals per species. These data sets often reveal the need to directly model intraspecies polymorphism and incomplete lineage sorting in phylogenetic estimation procedures. For a single species, coalescent theory is widely used in contemporary population genetics to model intraspecific gene trees. Here, we present a Bayesian Markov chain Monte Carlo method for the multispecies coalescent. Our method coestimates multiple gene trees embedded in a shared species tree along with the effective population size of both extant and ancestral species. The inference is made possible by multilocus data from multiple individuals per species. Using a multiindividual data set and a series of simulations of rapid species radiations, we demonstrate the efficacy of our new method. These simulations give some insight into the behavior of the method as a function of sampled individuals, sampled loci, and sequence length. Finally, we compare our new method to both an existing method (BEST 2.2) with similar goals and the supermatrix (concatenation) method. We demonstrate that both BEST and our method have much better estimation accuracy for species tree topology than concatenation, and our method outperforms BEST in divergence time and population size estimation.},
+% author = {Heled, Joseph and Drummond, Alexei J.},
+% doi = {10.1093/molbev/msp274},
+% journal = {Mol  Biol Evol},
+% keywords = {Bayesian inference,Censored coalescent,Gene trees,Molecular systematics,Multispecies coalescent,Species trees},
+% pages = {570--580},
+% pmid = {19906793},
+% title = {Bayesian Inference of Species Trees from Multilocus Data},
+% volume = {27},
+% year = {2010}
+% }
+% @article{BEST,
+% abstract = {The desire to infer the evolutionary history of a group of species should be more viable now that a considerable amount of multilocus molecular data is available. However, the current molecular phylogenetic paradigm still reconstructs gene trees to represent the species tree. Further, commonly used methods of combining data, such as the concatenation method, are known to be inconsistent in some circumstances. In this paper, we propose a Bayesian hierarchical model to estimate the phylogeny of a group of species using multiple estimated gene tree distributions, such as those that arise in a Bayesian analysis of DNA sequence data. Our model employs substitution models used in traditional phylogenetics but also uses coalescent theory to explain genealogical signals from species trees to gene trees and from gene trees to sequence data, thereby forming a complete stochastic model to estimate gene trees, species trees, ancestral population sizes, and species divergence times simultaneously. Our model is founded on the assumption that gene trees, even of unlinked loci, are correlated due to being derived from a single species tree and therefore should be estimated jointly. We apply the method to two multilocus data sets of DNA sequences. The estimates of the species tree topology and divergence times appear to be robust to the prior of the population size, whereas the estimates of effective population sizes are sensitive to the prior used in the analysis. These analyses also suggest that the model is superior to the concatenation method in fitting these data sets and thus provides a more realistic assessment of the variability in the distribution of the species tree that may have produced the molecular information at hand. Future improvements of our model and algorithm should include consideration of other factors that can cause discordance of gene trees and species trees, such as horizontal transfer or gene duplication.},
+% author = {Liu, Liang and Pearl, Dennis K},
+% doi = {10.1080/10635150701429982},
+% isbn = {10635157},
+% issn = {1063-5157},
+% journal = {Syst Biol},
+% pages = {504--514},
+% pmid = {17562474},
+% title = {{Species trees from gene trees: reconstructing Bayesian posterior distributions of a species phylogeny using estimated gene tree distributions.}},
+% volume = {56},
+% year = {2007}
+% }
+% @article{Larget2010,
+% abstract = {MOTIVATION: BUCKy is a C++ program that implements Bayesian concordance analysis. The method uses a non-parametric clustering of genes with compatible trees, and reconstructs the primary concordance tree from clades supported by the largest proportions of genes. A population tree with branch lengths in coalescent units is estimated from quartet concordance factors. AVAILABILITY: BUCKy is open source and distributed under the GNU general public license at www.stat.wisc.edu/∼ane/bucky/.},
+% archivePrefix = {arXiv},
+% arxivId = {0912.4472},
+% author = {Larget, Bret R. and Kotha, Satish K. and Dewey, Colin N. and An\'{e}, C\'{e}cile},
+% doi = {10.1093/bioinformatics/btq539},
+% eprint = {0912.4472},
+% isbn = {1367-4803},
+% issn = {13674803},
+% journal = {Bioinformatics},
+% pages = {2910--2911},
+% pmid = {20861028},
+% title = {{BUCKy: Gene tree/species tree reconciliation with Bayesian concordance analysis}},
+% volume = {26},
+% year = {2010}
+% }
+
+% @article{nj,
+% abstract = {A new method called the neighbor-joining method is proposed for reconstructing phylogenetic trees from evolutionary distance data. The principle of this method is to find pairs of operational taxonomic units (OTUs [= neighbors]) that minimize the total branch length at each stage of clustering of OTUs starting with a starlike tree. The branch lengths as well as the topology of a parsimonious tree can quickly be obtained by using this method. Using computer simulation, we studied the efficiency of this method in obtaining the correct unrooted tree in comparison with that of five other tree-making methods: the unweighted pair group method of analysis, Farris's method, Sattath and Tversky's method, Li's method, and Tateno et al.'s modified Farris method. The new, neighbor-joining method and Sattath and Tversky's method are shown to be generally better than the other methods.},
+% author = {Saitou, N and Nei, M},
+% doi = {citeulike-article-id:93683},
+% isbn = {0737-4038 (Print)$\backslash$r0737-4038 (Linking)},
+% issn = {0737-4038},
+% journal = {Mol Biol Evol},
+% pages = {406--425},
+% pmid = {3447015},
+% title = {{The neighbor-joining method: a new method for reconstructing phylogenetic trees.}},
+% volume = {4},
+% year = {1987}
+% }
+
+% @article{bayzid2014weighted,
+%   title={Weighted Statistical Binning: enabling statistically consistent genome-scale phylogenetic analyses},
+%   author={Bayzid, Md~S and Mirarab, Siavash and Warnow, Tandy },
+%   journal={PLOS One},
+%   year={2014}
+% }
+
+% @article{statbinningdata,
+%   title={Statistical binning improves species tree estimation in the presence of gene tree incongruence},
+%   author={Mirarab, Siavash and Bayzid, Md~S and Bossau, Bastien and Warnow, Tandy},
+%   journal={IDEALS},
+%   doi={ http://dx.doi.org/10.13012/C5MW2F2P},
+%   year={2014}
+% }
+@article{jarvis2014whole,
+  title={Whole-genome analyses resolve early branches in the tree of life of modern birds},
+  author={Jarvis, Erich D and Mirarab, Siavash and Aberer, Andre J and Li, Bo and Houde, Peter and Li, Cai and Ho, Simon YW and Faircloth, Brant C and Nabholz, Benoit and Howard, Jason T and others},
+  journal={Science},
+  volume={346},
+  number={6215},
+  pages={1320--1331},
+  year={2014},
+  publisher={American Association for the Advancement of Science}
+}
+
+% @article{song2012resolving,
+%   title={Resolving conflict in eutherian mammal phylogeny using phylogenomics and the multispecies coalescent model},
+%   author={Song, Sen and Liu, Liang and Edwards, Scott V and Wu, Shaoyuan},
+%   journal={Proc Natl Acad Sci USA},
+%   volume={109},
+%   number={37},
+%   pages={14942--14947},
+%   year={2012},
+% }
+
+% @misc{SimPhy,
+%   title={{SimPhy}: Comprehensive Simulation of Gene, Locus and Species Trees at the Genome-wide Level},
+%   author={Mallo, Diego and Oliviera Martins, L and Posada, D},
+%   url={https://github.com/adamallo/SimPhy}
+% }
+
+% @article{Indelible,
+% abstract = {Many methods exist for reconstructing phylogenies from molecular sequence data, but few phylogenies are known and can be used to check their efficacy. Simulation remains the most important approach to testing the accuracy and robustness of phylogenetic inference methods. However, current simulation programs are limited, especially concerning realistic models for simulating insertions and deletions. We implement a portable and flexible application, named INDELible, for generating nucleotide, amino acid and codon sequence data by simulating insertions and deletions (indels) as well as substitutions. Indels are simulated under several models of indel-length distribution. The program implements a rich repertoire of substitution models, including the general unrestricted model and nonstationary nonhomogeneous models of nucleotide substitution, mixture, and partition models that account for heterogeneity among sites, and codon models that allow the nonsynonymous/synonymous substitution rate ratio to vary among sites and branches. With its many unique features, INDELible should be useful for evaluating the performance of many inference methods, including those for multiple sequence alignment, phylogenetic tree inference, and ancestral sequence, or genome reconstruction.},
+% author = {Fletcher, William and Yang, Ziheng},
+% doi = {10.1093/molbev/msp098},
+% isbn = {0737-4038},
+% issn = {07374038},
+% journal = {Molecular Biology and Evolution},
+% keywords = {Codon models,Deletion,Indels,Insertion,Nonstationary process,Simulation},
+% pages = {1879--1888},
+% pmid = {19423664},
+% title = {{INDELible: A flexible simulator of biological sequence evolution}},
+% volume = {26},
+% year = {2009}
+% }
+
+% @article{Gascuel1997,
+% abstract = {We propose an improved version of the neighbor-joining (NJ) algorithm of Saitou and Nei. This new algorithm, BIONJ, follows the same agglomerative scheme as NJ, which consists of iteratively picking a pair of taxa, creating a new mode which represents the cluster of these taxa, and reducing the distance matrix by replacing both taxa by this node. Moreover, BIONJ uses a simple first-order model of the variances and covariances of evolutionary distance estimates. This model is well adapted when these estimates are obtained from aligned sequences. At each step it permits the selection, from the class of admissible reductions, of the reduction which minimizes the variance of the new distance matrix. In this way, we obtain better estimates to choose the pair of taxa to be agglomerated during the next steps. Moreover, in comparison with NJ's estimates, these estimates become better and better as the algorithm proceeds. BIONJ retains the good properties of NJ--especially its low run time. Computer simulations have been performed with 12-taxon model trees to determine BIONJ's efficiency. When the substitution rates are low (maximum pairwise divergence approximately 0.1 substitutions per site) or when they are constant among lineages, BIONJ is only slightly better than NJ. When the substitution rates are higher and vary among lineages,BIONJ clearly has better topological accuracy. In the latter case, for the model trees and the conditions of evolution tested, the topological error reduction is on the average around 20\%. With highly-varying-rate trees and with high substitution rates (maximum pairwise divergence approximately 1.0 substitutions per site), the error reduction may even rise above 50\%, while the probability of finding the correct tree may be augmented by as much as 15\%.},
+% author = {Gascuel, O},
+% isbn = {0737-4038 (Print)$\backslash$n0737-4038 (Linking)},
+% issn = {0737-4038},
+% journal = {Mol Biol Evol},
+% keywords = {*Biological Evolution,*Phylogeny,Algorithms,Biological,Biological Evolution,Models,Phylogeny,Sequence Analysis,Sequence Analysis/*methods,Sequence Analysis: methods,Software},
+% pages = {685--695},
+% pmid = {9254330},
+% title = {{BIONJ: an improved version of the NJ algorithm based on a simple model of sequence data}},
+% url = {http://www.ncbi.nlm.nih.gov/pubmed/9254330$\backslash$nhttp://mbe.oxfordjournals.org/content/14/7/685.full.pdf},
+% volume = {14},
+% year = {1997}
+% }
+
+@article{Gascuel2000,
+abstract = {Let D be an ultrametric (or tree) distance, T its tree representation, and Delta a dissimilarity that is an estimate of D. Our aim is to reconstruct T from Delta. This problem is encountered, for example, in biology and archaeology, where T represents the history of some living species or relies from the past, and where Delta estimates the pairwise divergence times between these species or relies. Moreover, we assume that the variance-covariance matrix V of elements in Delta is available. This matrix may be a consequence of the experimental process used to collect the data, or induced by the data model at hand. We propose to exploit this additional knowledge, by modifying the usual agglomerative (or ascending) algorithm. At each step of the algorithm, our approach involves reducing the dissimilarity matrix so that the variance of its elements is minimized. We thus obtain more reliable estimates for (a) selecting the pair of objects to be merged and (b) the edge-lengths. This "minimum variance reduction (MVR)" method applies to both ultrametric and tree distances. Moreover, the computational complexity is as low as possible because it is linear in the size of V, i.e., O(n(4)), where n is the number of objects. We describe the application of the MVR method to two data models: the weighted least-squares (WLS) model (V is diagonal), where the MVR method can be reduced to an O(n(3)) time complexity; a model arising from the study of biological sequences, which involves a complex non-diagonal V matrix that is estimated from the dissimilarity matrix Delta. For both models, we provide simulation results that show a significant error reduction in the reconstruction of T, relative to classical agglomerative algorithms.},
+author = {Gascuel, O},
+doi = {10.1007/s003570000005},
+isbn = {0176-4268},
+journal = {Journal of Classification},
+pages = {67--99},
+title = {{Data model and classification by trees: The minimum variance reduction (MVR) method}},
+url = {<Go to ISI>://WOS:000087113500004},
+volume = {17},
+year = {2000}
+}
+
+% @article{gascuel1997concerning,
+%   title={{Concerning the NJ algorithm and its unweighted version, UNJ}},
+%   author={Gascuel, Olivier},
+%   journal={Mathematical hierarchies and biology},
+%   volume={37},
+%   pages={149--171},
+%   year={1997},
+%   publisher={American Mathematical Society Providence, RI, USA}
+% }
+
+
+@article{essw1,
+        Author = {{P.L.} Erdos and M.A. Steel and L. Szekely and T. Warnow},
+        Journal = {Random Structures and Algorithms},
+        Pages = {153--184},
+        Title = {A few logs suffice to build (almost) all trees (i)},
+        Volume = {14},
+        Year = {1999}}
+
+@article{essw2,
+        Author = {{P.L.} Erdos and M.A. Steel and L. Szekely and T. Warnow},
+        Journal = {Theoretical Computer Science},
+        Pages = {77-118},
+        Title = {A few logs suffice to build (almost) all trees (ii)},
+        Volume = {221},
+        Year = {1999}}
+
+
+@inproceedings{dcm1-nj,
+        Author = {T. Warnow and B. M. E. Moret and K. {St.~John}},
+        Booktitle = {Proc 12th Ann ACM/SIAM Symp Discrete Algs (SODA01)},
+        Pages = {186--195},
+        Publisher = {SIAM Press},
+        Title = {Absolute phylogeny: true trees from short sequences},
+        address  = {Philadelphia, PA},
+        Year = 2001}
+
+
+@inproceedings{Roch08,
+author = {S\'ebastien Roch},
+title = {Sequence-length requirement for distance-based
+phylogeny reconstruction: Breaking the polynomial barrier},
+booktitle = {Proc 2008 Symp Found Comp Sci (FOCS08)},
+pages = {729–-738},
+year =  2008,
+}
+
+
+@article{roch-science,
+journal = {Science},
+year = {2010},
+Volume =  {327},
+number = 5971,
+pages = {1376--1379},
+author = {S Roch},
+title = {Towards extracting all phylogenetic
+information from matrices of evolutionary distances},
+}
+
+
+
+% @article{RF,
+%         Author = {D.F. Robinson and L.R. Foulds},
+%         Journal = {Math Biosci},
+%         Pages = {131-147},
+%         Title = {Comparison of Phylogenetic Trees},
+%         Volume = {53},
+%         Year = {1981}}
+
+
+
+% @article{maddison,
+%         Author = {W. Maddison},
+%         Journal = {Syst Biol},
+%         Number = 3,
+%         Pages = {523--536},
+%         Title = {Gene trees in species trees},
+%         Volume = 46,
+%         Year = 1997}
+
+
+@article{bbca,
+author = {T. Zimmermann and S. Mirarab and T. Warnow},
+title = {{BBCA: Improving the scalability of *BEAST} using random binning},
+journal =   {BMC Genomics},
+year =  {2014},
+volume = {15 (Suppl 6)},
+pages = {S11},
+}
+
+@article{BayzidRECOMBCG2014,
+author = {Md.~S. Bayzid and T Hunt and T. Warnow},
+title = {Disk covering methods improve phylogenomic analyses},
+year = 2014,
+journal = {BMC Genomics},
+volume = {15 (Suppl 6)},
+pages = {S7},
+}
+
+@article{chifman2014quartet,
+IDS={svdq,svdquartets},
+  title={Quartet inference from SNP data under the coalescent model},
+  author={Chifman, Julia and Kubatko, Laura},
+  journal={Bioinformatics},
+  volume={30},
+  number={23},
+  pages={3317--3324},
+  year={2014},
+  publisher={Oxford University Press}
+}
+
+
+
+
+
+% @article{snapp,
+%   title={Inferring species trees directly from biallelic genetic markers: bypassing gene trees in a full coalescent analysis},
+%   author={Bryant, David and Bouckaert, Remco and Felsenstein, Joseph and Rosenberg, Noah A and RoyChoudhury, Arindam},
+%   journal={Mol Biol Evol},
+%   volume={29},
+%   number={8},
+%   pages={1917--1932},
+%   year={2012},
+%   publisher={SMBE}
+% }
+
+@article{statbinning,
+  IDS={statistical-binning, Mirarab12122014, mirarab2014statistical, statbinningdata},
+  title={Statistical binning enables an accurate coalescent-based estimation of the avian tree},
+  author={Mirarab, Siavash and Bayzid, Md~Shamsuzzoha and Boussau, Bastien and Warnow, Tandy},
+  journal={Science},
+  volume={346},
+  number={6215},
+  pages={1250463},
+  year={2014},
+  publisher={American Association for the Advancement of Science}
+}
+
+% @article{siavash-sysbio,
+%   title={Evaluating summary methods for multi-locus species tree estimation in the presence of incomplete lineage sorting},
+%   author={Mirarab, Siavash and Bayzid, Md~Shamsuzzoha and Warnow, Tandy},
+%   journal={Syst Biol},
+%   pages={syu063},
+%   year={2014},
+%   publisher={Oxford University Press}
+% }
+
+% @ARTICLE{naive,
+%   author = {Bayzid, Md Shamsuzzoha and Warnow, Tandy},
+%   title = {{Naive binning improves phylogenomic analyses}},
+%   journal = {Bioinformatics},
+%   year = {2013},
+%   volume = {29},
+%   pages = {2277--84},
+%   number = {18},
+%   abstract = {MOTIVATION: Species tree estimation in the presence of incomplete
+%         lineage sorting (ILS) is a major challenge for phylogenomic analysis.
+%         Although many methods have been developed for this problem, little
+%         is understood about the relative performance of these methods when
+%         estimated gene trees are poorly estimated, owing to inadequate phylogenetic
+%         signal. RESULTS: We explored the performance of some methods for
+%         estimating species trees from multiple markers on simulated datasets
+%         in which gene trees differed from the species tree owing to ILS.
+%         We included *BEAST, concatenated analysis and several 'summary methods':
+%         BUCKy, MP-EST, minimize deep coalescence, matrix representation with
+%         parsimony and the greedy consensus. We found that *BEAST and concatenation
+%         gave excellent results, often with substantially improved accuracy
+%         over the other methods. We observed that *BEAST's accuracy is largely
+%         due to its ability to co-estimate the gene trees and species tree.
+%         However, *BEAST is computationally intensive, making it challenging
+%         to run on datasets with 100 or more genes or with more than 20 taxa.
+%         We propose a new approach to species tree estimation in which the
+%         genes are partitioned into sets, and the species tree is estimated
+%         from the resultant 'supergenes'. We show that this technique improves
+%         the scalability of *BEAST without affecting its accuracy and improves
+%         the accuracy of the summary methods. Thus, naive binning can improve
+%         phylogenomic analysis in the presence of ILS. CONTACT: tandy@cs.utexas.edu
+%         SUPPLEMENTARY INFORMATION: Supplementary data are available at Bioinformatics
+%         online.},
+%   doi = {10.1093/bioinformatics/btt394},
+%   issn = {1367--4811},
+%   pmid = {23842808},
+%   url = {http://www.ncbi.nlm.nih.gov/pubmed/23842808}
+% }
+
+
+% @article{song2012,
+%   title={Resolving conflict in eutherian mammal phylogeny using phylogenomics and the multispecies coalescent model},
+%   author={Song, Sen and Liu, Liang and Edwards, Scott V and Wu, Shaoyuan},
+%   journal={Proc Natl Acad  Sci USA},
+%   volume={109},
+%   number={37},
+%   pages={14942--14947},
+%   year={2012},
+%   publisher={National Acad Sciences}
+% }
+
+
+@article{GatesyMPE2014,
+title = {Phylogenetic analysis at deep timescales: Unreliable gene trees,
+ bypassed hidden support, and the coalescence/concatalescence
+ conundrum},
+author = {J.P. Gatesy and M.S. Springer},
+journal = {Mol Phylog Evol},
+year = 2014,
+volume = 80,
+pages = {231-266},
+}
+
+% @article{roch2015robustness,
+%   title={On the robustness to gene tree estimation error (or lack thereof) of coalescent-based species tree methods},
+%   author={Roch, Sebastien and Warnow, Tandy},
+%   journal={Syst Biol},
+%   year={2015},
+% volume = 64, number =  4, pages = {663--676},
+% }
+
+% @misc{MosselRoch2015,
+% author = {E Mossel and S Roch},
+% title = {Distance-based species tree estimation: information-theoretic trade-off between number of loci and sequence length under the coalescent},
+% note = {ArXiv publication, arXiv:1504.05289},
+% year = 2015,
+% }
+
+@article{metal,
+title = {Data Requirement for Phylogenetic Inference 
+from Multiple Loci: A New Distance Method},
+author = {G Dasarathy and  R Nowak and S Roch},
+journal = {IEEE/ACM Trans Comp  Biol Bioinformatics},
+year =  2015, volume =  12, issue =  2,
+pages = {422 -- 432},
+note = {DOI: 10.1109/TCBB.2014.2361685},
+}
+
+
+@article{liu2009coalescent,
+  title={Coalescent methods for estimating phylogenetic trees},
+  author={Liu, Liang and Yu, Lili and Kubatko, Laura and Pearl, Dennis K and Edwards, Scott V},
+  journal={Mol Phylogenet Evol},
+  volume={53},
+  number={1},
+  pages={320--328},
+  year={2009},
+  publisher={Elsevier}
+}
+
+@article{STEM,
+author = {L.  Kubatko and B.C.  Carstens and L.L.  Knowles},
+year =  2009,
+title = {{ STEM}: Species tree estimation using
+maximum likelihood for gene trees under coalescence},
+journal = { Bioinformatics}, volume = 25, 
+pages = {971– 973},
+}
+
+% @article{STEAC,
+% author = {L. Liu and L.  Yu and D.K.  Pearl and
+% S.V. Edwards},
+% year =  2009,
+% title = { Estimating species phylogenies using
+% coalescence times among sequences},
+% journal = {Syst Biol},
+% volume = 58, number = 5, pages = {468--477},
+% note = { doi:10.1093/sysbio/syp031},
+% }
+
+
+% @article{Degnan2009,
+% abstract = {The field of phylogenetics is entering a new era in which trees of historical relationships between species are increasingly inferred from multilocus and genomic data. A major challenge for incorporating such large amounts of data into inference of species trees is that conflicting genealogical histories often exist in different genes throughout the genome. Recent advances in genealogical modeling suggest that resolving close species relationships is not quite as simple as applying more data to the problem. Here we discuss the complexities of genealogical discordance and review the issues that new methods for multilocus species tree inference will need to address to account successfully for naturally occurring genomic variability in evolutionary histories.},
+% author = {Degnan, James H. and Rosenberg, Noah A.},
+% doi = {10.1016/j.tree.2009.01.009},
+% file = {:Users/smirarab/Research/papers//2009 - Trends in ecology \& evolution - Degnan, Rosenberg.pdf:pdf},
+% institution = {Department of Human Genetics, University of Michigan, Ann Arbor, MI 48109, USA. j.degnan@math.canterbury.ac.nz},
+% isbn = {0169-5347},
+% issn = {01695347},
+% journal = {Trends Ecol Evol},
+% keywords = {oct2011},
+% mendeley-groups = {HMMI,binning,proposal},
+% mendeley-tags = {oct2011},
+% month = jun,
+% number = {6},
+% pages = {332--340},
+% pmid = {19307040},
+% publisher = {Elsevier Science Publishers},
+% title = {{Gene tree discordance, phylogenetic inference and the multispecies coalescent}},
+% type = {Journal article},
+% url = {http://www.cell.com/ecology-evolution/abstract/S0169-5347(09)00084-6 http://www.sciencedirect.com/science/article/pii/S0169534709000846},
+% volume = {24},
+% year = {2009}
+% }
+
+
+
+@book{KnowlesKubatkoBook,
+author = {L.L. Knowles and L. Kubatko},
+year = 2011,
+publisher = {Wiley-Blackwell},
+title = {Estimating Species Trees: Practical and Theoretical Aspects},
+address = {Hoboken, NJ},
+}
+
+@article{NakhlehISMB2001,
+author = {Nakhleh, Luay and Roshan, Usman and St.~John, Katherine and Sun, Jerry and Warnow, Tandy}, 
+title = {Designing fast converging phylogenetic methods},
+volume = {17}, 
+number = {suppl 1}, 
+pages = {S190-S198}, 
+year = {2001}, 
+doi = {10.1093/bioinformatics/17.suppl\_1.S190}, 
+abstract ={Absolute fast converging phylogenetic reconstruction 
+ methods are provably guaranteed to recover the true tree with high 
+ probability from sequences that grow only polynomially in the number 
+ of leaves, once the edge lengths are bounded arbitrarily from above 
+ and below. Only a few methods have been determined to be absolute 
+ fast converging; these have all been developed in just the last few 
+ years, and most are polynomial time. In this paper, we compare 
+ pre-existing fast converging methods as well as some new polynomial 
+ time methods that we have developed. Our study, based upon simulating 
+ evolution under a wide range of model conditions, establishes that 
+ our new methods outperform both neighbor joining and the previous 
+ fast converging methods, returning very accurate large trees, when 
+ these other methods do poorly.Contact: usman@cs.utexas.edu}, 
+journal = {Bioinformatics} 
+}
+
+@article{gronau-afc,
+title = {Fast and reliable reconstruction of phylogenetic trees with indistinguishable edges},
+author = {Gronau, Ilan and Moran, Shlomo and Snir, Sagi},
+journal = {J Random Struct  Algs},
+year = 2012, volume  = 40, number = 3, pages = {350--384},
+url = {http://dx.doi.org/10.1002/rsa.20372},
+note = { doi=10.1002/rsa.20372},
+}
+
